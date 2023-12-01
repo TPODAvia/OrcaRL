@@ -1,0 +1,23 @@
+[submodule "embedded_components/computer"]
+	path = embedded_components/computer
+	url = https://gist.github.com/1b4a19a85fc0c5d366d2.git
+	branch = master
+[submodule "embedded_components/controller"]
+	path = embedded_components/controller
+	url = https://gist.github.com/a396f5fd8161548c4f87.git
+	branch = master
+[submodule "embedded_components/speaker"]
+	path = embedded_components/speaker
+	url = https://gist.github.com/cd0df6aa8d19c5701f0a.git
+	branch = master
+[submodule "embedded_components/camera"]
+	path = embedded_components/camera
+	url = https://gist.github.com/b2f4e896bee72f8bc75d.git
+	branch = master
+[submodule "embedded_components/display"]
+	path = embedded_components/display
+	url = https://gist.github.com/5c22842eb3abc8b4a68a.git
+	branch = master
+[submodule "embedded_components/imu"]
+	path = embedded_components/imu
+	url = https://github.com/matthieu-lapeyre/9DOF_Razor_IMU

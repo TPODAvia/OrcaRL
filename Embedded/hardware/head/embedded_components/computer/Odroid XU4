@@ -1,0 +1,3 @@
+This model is forked from the previous work of  Edward Yam available here: https://grabcad.com/library/odroid-xu4-mockup-1
+
+The purpose of this Gist is to permit the use of git submodule and easily integrate the Odroid XU4 in Poppy creatures.
