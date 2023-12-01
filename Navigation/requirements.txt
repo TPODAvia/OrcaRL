@@ -4,7 +4,7 @@
 absl-py==1.4.0
 
 # Gym environment
-gym==0.25.2
+gym==0.23.1
 ale-py==0.7.5
 AutoROM==0.6.1
 AutoROM.accept-rom-license==0.6.1
