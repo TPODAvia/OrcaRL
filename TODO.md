@@ -1,0 +1,13 @@
+-- NLP folder
+   - train
+   - test
+   - use
+-- Navigation folder
+   - train
+   - test
+   - use
+-- Body control folder
+   - train
+   - test
+   - use
+-- Embedded control
