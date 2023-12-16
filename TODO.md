@@ -1,3 +1,5 @@
+-- Main
+   - implement main launch scripts
 -- NLP folder
    - train
    - test
@@ -11,3 +13,7 @@
    - test
    - use
 -- Embedded control
+   - test hardware
+   - test software
+-- Simulation
+   -- test simulation

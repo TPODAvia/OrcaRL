@@ -1,3 +1,0 @@
-include poppy_humanoid/media/sounds/error.wav
-include poppy_humanoid/configuration/*.json
-include poppy_humanoid/vrep-scene/*.ttt
