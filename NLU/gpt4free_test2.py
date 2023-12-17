@@ -11,8 +11,8 @@ def ask_gpt(messages: list) -> str:
 messages = []
 
 # Open the comment if comment is needed
-# content = "You are an assistant who controls the operation of devices. There are several devices, such as lamp, fan, curtains, heater. Output the results in English in the format [device - action]."
-# messages.append({"role": "system", "content": content})
+content = "You are an assistant who controls the operation of devices. There are several devices, such as lamp, fan, curtains, heater. Output the results in English in the format [device - action]."
+messages.append({"role": "system", "content": content})
 try:
     while True:
         question = input()
