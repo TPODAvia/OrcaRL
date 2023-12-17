@@ -1,4 +1,4 @@
-#include <ros2arduino.h>
+#include <ros/ros.h>
 #include <Servo.h>
 #include <std_msgs/MultiArrayLayout.h>
 #include <std_msgs/MultiArrayDimension.h>
@@ -15,31 +15,32 @@ Servo servo3;
 #define NUM_SERVOS 30
 int servoPins[NUM_SERVOS] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31}; 
 
-ROS2Arduino ros2(Serial);
-ros2::Publisher<std_msgs::Int32MultiArray> analog_pub;
-ros2::Publisher<geometry_msgs::Quaternion> quaternion_pub;
-ros2::Publisher<std_msgs::Float32> height_pub;
+ros::Publisher analog_pub;
+ros::Publisher quaternion_pub;
+ros::Publisher height_pub;
 
 MPU9250_asukiaaa sensor;
 Adafruit_BMP280 bmp;
 
 void setup() {
-  ros2.init();
-  ros2.subscribe("servo_command", &callback);
-  analog_pub = ros2.advertise<std_msgs::Int32MultiArray>("analog_values");
-  quaternion_pub = ros2.advertise<geometry_msgs::Quaternion>("quaternion");
-  height_pub = ros2.advertise<std_msgs::Float32>("height");
+  ros::init(argc, argv, "node_name");
+  ros::NodeHandle nh;
+
+  ros::Subscriber sub = nh.subscribe("servo_command", 1000, callback);
+  analog_pub = nh.advertise<std_msgs::Int32MultiArray>("analog_values", 1000);
+  quaternion_pub = nh.advertise<geometry_msgs::Quaternion>("quaternion", 1000);
+  height_pub = nh.advertise<std_msgs::Float32>("height", 1000);
 
   sensor.beginAccel();
   sensor.beginMag();
   if (!bmp.begin()) {
-    Serial.println("Could not find a valid BMP280 sensor, check wiring!");
+    ROS_ERROR("Could not find a valid BMP280 sensor, check wiring!");
     while (1);
   }
 }
 
 void loop() {
-  ros2.spinOnce();
+  ros::spinOnce();
 
   // Read analog values
   std_msgs::Int32MultiArray array;
@@ -87,16 +88,8 @@ void callback(const std_msgs::Int32& msg) {
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 10; j++) {
       int pin = servoPins[i*10 + j];
-      if (i == 0) {
-        servo1.attach(pin);
-        servo1.write(command);
-      } else if (i == 1) {
-        servo2.attach(pin);
-        servo2.write(command);
-      } else {
-        servo3.attach(pin);
-        servo3.write(command);
-      }
+      servo1.attach(pin);
+      servo1.write(command);
     }
   }
 }

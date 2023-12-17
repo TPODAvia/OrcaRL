@@ -1,0 +1,15 @@
+{
+  "short_name": "Indoor positioning",
+  "name": "iBeacon indoor positioning dashboard",
+  "icons": [
+    {
+      "src": "favicon.gif",
+      "sizes": "119x120",
+      "type": "image/x-icon"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
