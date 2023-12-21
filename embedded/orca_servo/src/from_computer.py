@@ -1,36 +1,42 @@
+#!/usr/bin/env python3
+
 import rospy
-from std_msgs.msg import Int32MultiArray, Float32
-from geometry_msgs.msg import Quaternion
+import serial
+from std_msgs.msg import Int32MultiArray
 
-class ServoController:
-    def __init__(self):
-        rospy.init_node('servo_controller', anonymous=True)
-        self.publisher_ = rospy.Publisher('servo_command', Int32MultiArray, queue_size=10)
-        rospy.Subscriber('analog_values', Int32MultiArray, self.listener_callback1)
-        rospy.Subscriber('quaternion', Quaternion, self.listener_callback2)
-        rospy.Subscriber('height', Float32, self.listener_callback3)
+# Define the serial port and baud rate
+ser = serial.Serial('/dev/ttyUSB0', 9600)
 
-    def send_command(self, command):
-        msg = Int32MultiArray()
-        msg.data = command
-        self.publisher_.publish(msg)
+def serial_to_ros():
+   # Create a publisher
+   pub = rospy.Publisher('servo_command', Int32MultiArray, queue_size=10)
 
-    def listener_callback1(self, msg):
-        rospy.loginfo('Analog values: %s' % msg.data)
+   # Initialize the node
+   rospy.init_node('serial_to_ros', anonymous=True)
 
-    def listener_callback2(self, msg):
-        rospy.loginfo('Quaternion: x=%s, y=%s, z=%s, w=%s' % (msg.x, msg.y, msg.z, msg.w))
+   # Loop until the node is shut down
+   while not rospy.is_shutdown():
+       # Read data from the serial port
+       data = ser.read(16)
 
-    def listener_callback3(self, msg):
-        rospy.loginfo('Height: %s' % msg.data)
+       # Convert the data to integers
+       data_int = [int(byte) for byte in data]
 
-def main():
-    servo_controller = ServoController()
+       # Create a message
+       msg = Int32MultiArray()
+       msg.data = data_int
 
-    # Send a command to the servos
-    servo_controller.send_command([90, 90, 90])
+       # Publish the message
+       pub.publish(msg)
 
-    rospy.spin()
+       # Print the data to the screen
+       print(data_int)
+
+       # Sleep for a while
+       rospy.sleep(0.1)
 
 if __name__ == '__main__':
-    main()
+   try:
+       serial_to_ros()
+   except rospy.ROSInterruptException:
+       pass
