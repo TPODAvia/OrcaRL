@@ -1,0 +1,5 @@
+https://gist.githubusercontent.com/per1234/542b91ae032eda10e6159fe1affb7f55/raw/7afa67fdb4003e865c829f7ddba92ec36be91271/package_samarm64_index.json
+
+https://forum.arduino.cc/t/board-manager-on-latest-release-fails-to-load-due-samx-libraries/668211
+
+https://github.com/JetsonHacksNano/installArduinoIDE
