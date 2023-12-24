@@ -23,3 +23,5 @@ sudo wget -qO- https://docs.luxonis.com/install_depthai.sh | bash
 2) how to create virtual environment
 3) How to install and flash arduino
 4) How to install unity
+
+sudo apt install watchdog
